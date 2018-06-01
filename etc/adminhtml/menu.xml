@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * KiwiCommerce
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please contact us https://kiwicommerce.co.uk/contacts.
+ *
+ * @category   KiwiCommerce
+ * @package    KiwiCommerce_AdminActivity
+ * @copyright  Copyright (C) 2018 Kiwi Commerce Ltd (https://kiwicommerce.co.uk/)
+ * @license    https://kiwicommerce.co.uk/magento2-extension-license/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="KiwiCommerce_AdminActivity::activity_head" title="Admin Activity by KiwiCommerce" module="KiwiCommerce_AdminActivity" sortOrder="100" parent="Magento_Backend::system" resource="KiwiCommerce_AdminActivity::activity_head" />
+        <add id="KiwiCommerce_AdminActivity::activity" title="Admin Activity" module="KiwiCommerce_AdminActivity" sortOrder="10" parent="KiwiCommerce_AdminActivity::activity_head" action="adminactivity/activity" resource="KiwiCommerce_AdminActivity::activity" />
+        <add id="KiwiCommerce_AdminActivity::login_activity" title="Login Activity" module="KiwiCommerce_AdminActivity" sortOrder="20" parent="KiwiCommerce_AdminActivity::activity_head" action="adminactivity/login" resource="KiwiCommerce_AdminActivity::login_activity" />
+        <add id="KiwiCommerce_AdminActivity::configuration" title="Configuration" module="KiwiCommerce_AdminActivity" sortOrder="40" parent="KiwiCommerce_AdminActivity::activity_head" action="adminhtml/system_config/edit/section/admin_activity" resource="KiwiCommerce_AdminActivity::configuration"/>
+    </menu>
+</config>

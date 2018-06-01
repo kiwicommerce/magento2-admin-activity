@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * KiwiCommerce
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please contact us https://kiwicommerce.co.uk/contacts.
+ *
+ * @category   KiwiCommerce
+ * @package    KiwiCommerce_AdminActivity
+ * @copyright  Copyright (C) 2018 Kiwi Commerce Ltd (https://kiwicommerce.co.uk/)
+ * @license    https://kiwicommerce.co.uk/magento2-extension-license/
+ */
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="actions" type="adminActions" minOccurs="0" />
+                <xs:element name='modules'  type="adminModules" minOccurs="1" />
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="adminActions">
+        <xs:sequence>
+            <xs:element name="action" type="adminAction" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="adminAction">
+        <xs:sequence>
+            <xs:element name="label" type="actionLabel" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="adminModules">
+        <xs:sequence>
+            <xs:element name="module" type="adminModule" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="adminModule">
+        <xs:all>
+            <xs:element name="label" type="actionLabel" minOccurs="0" maxOccurs="1" />
+            <xs:element name="models" type="modelClass" minOccurs="0" />
+            <xs:element name="events" type="modelEvents" minOccurs="0" />
+            <xs:element name="config" type="configEvents" minOccurs="0" />
+        </xs:all>
+        <xs:attribute name="name" type="xs:token" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="actionLabel">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="translate" use="optional" fixed="true" type="xs:boolean"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="modelClass">
+        <xs:sequence>
+            <xs:element name="class" type="className" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="modelEvents">
+        <xs:sequence>
+            <xs:element name="event" type="eventType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="configEvents">
+        <xs:sequence>
+            <xs:element name="trackfield" type="classMethod" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="configpath" type="modelConstant" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="editurl" type="editurl" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="itemfield" type="field" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="classMethod">
+        <xs:attribute name="method" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="modelConstant">
+        <xs:attribute name="constant" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="editurl">
+        <xs:attribute name="url" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="field">
+        <xs:attribute name="field" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="eventType">
+        <xs:attribute name="controller_action" type="xs:token" use="required" />
+        <xs:attribute name="action_alias" type="xs:token" use="required" />
+        <xs:attribute name="post_dispatch" type="xs:token" />
+    </xs:complexType>
+    <xs:complexType name="className">
+        <xs:attribute name="name" type="xs:token" use="required" />
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,63 @@
+KiwiCommerce,KiwiCommerce
+"Admin Activity","Admin Activity"
+"Login Activity","Login Activity"
+actions,actions
+"Something went wrong, please try again","Something went wrong, please try again"
+"Activity data has already been reverted","Activity data has already been reverted"
+"Activity data has been reverted successfully","Activity data has been reverted successfully"
+"Real ip address if visitor used proxy","Real ip address if visitor used proxy"
+"Scope of activity","Scope of activity"
+"Reason for failed","Reason for failed"
+"All Store Views","All Store Views"
+View,View
+"Activity Log","Activity Log"
+Back,Back
+Revert,Revert
+New,New
+Edit,Edit
+Delete,Delete
+Orders,Orders
+"Catalog Products","Catalog Products"
+"Catalog Categories","Catalog Categories"
+Customer,Customer
+"Customer Group","Customer Group"
+"Catalog Promotion","Catalog Promotion"
+"Cart Promotion","Cart Promotion"
+Email,Email
+"Cms Pages","Cms Pages"
+"Cms Blocks","Cms Blocks"
+"Cms Widget","Cms Widget"
+Themes,Themes
+"System Configuration","System Configuration"
+"Product Attributes","Product Attributes"
+"Admin User","Admin User"
+"General Configuration","General Configuration"
+Enable,Enable
+"Enable Login Activity","Enable Login Activity"
+"Clear Admin Activity Logs After","Clear Admin Activity Logs After"
+"Clear all admin activity logs after this days","Clear all admin activity logs after this days"
+"Allow Module","Allow Module"
+Order,Order
+Product,Product
+Category,Category
+Promotion,Promotion
+"Email Templates","Email Templates"
+Page,Page
+Block,Block
+Widget,Widget
+Theme,Theme
+"Admin user","Admin user"
+"Store View","Store View"
+All,All
+"Action Type","Action Type"
+Date,Date
+Username,Username
+Name,Name
+"Activity Type","Activity Type"
+Module,Module
+IP,IP
+Item,Item
+Type,Type
+"IP Address","IP Address"
+"User Agent","User Agent"
+Status,Status

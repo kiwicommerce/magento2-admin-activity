@@ -1,0 +1,614 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * KiwiCommerce
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please contact us https://kiwicommerce.co.uk/contacts.
+ *
+ * @category   KiwiCommerce
+ * @package    KiwiCommerce_AdminActivity
+ * @copyright  Copyright (C) 2018 Kiwi Commerce Ltd (https://kiwicommerce.co.uk/)
+ * @license    https://kiwicommerce.co.uk/magento2-extension-license/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="adminactivity.xsd">
+    <actions>
+        <action id="view">
+            <label translate="true">View</label>
+        </action>
+        <action id="save">
+            <label translate="true">New</label>
+        </action>
+        <action id="edit">
+            <label translate="true">Edit</label>
+        </action>
+        <action id="delete">
+            <label translate="true">Delete</label>
+        </action>
+        <action id="massDelete">
+            <label translate="true">Mass Delete</label>
+        </action>
+        <action id="massStatus">
+            <label translate="true">Mass Status</label>
+        </action>
+        <action id="massEdit">
+            <label translate="true">Mass Edit</label>
+        </action>
+        <action id="massSubscribe">
+            <label translate="true">Mass Subscribe</label>
+        </action>
+        <action id="massUnsubscribe">
+            <label translate="true">Mass Unsubscribe</label>
+        </action>
+        <action id="massAssignGroup">
+            <label translate="true">Mass Assign Group</label>
+        </action>
+        <action id="massDisable">
+            <label translate="true">Mass Disable</label>
+        </action>
+        <action id="massEnable">
+            <label translate="true">Mass Enable</label>
+        </action>
+        <action id="reorder">
+            <label translate="true">Reorder</label>
+        </action>
+        <action id="hold">
+            <label translate="true">Hold</label>
+        </action>
+        <action id="unhold">
+            <label translate="true">Unhold</label>
+        </action>
+        <action id="cancel">
+            <label translate="true">Cancel</label>
+        </action>
+        <action id="addComment">
+            <label translate="true">Add Comment</label>
+        </action>
+        <action id="massCancel">
+            <label translate="true">Mass Cancel</label>
+        </action>
+        <action id="massHold">
+            <label translate="true">Mass Hold</label>
+        </action>
+        <action id="massUnhold">
+            <label translate="true">Mass Unhold</label>
+        </action>
+        <action id="assign">
+            <label translate="true">Assign</label>
+        </action>
+        <action id="unassign">
+            <label translate="true">Unassign</label>
+        </action>
+    </actions>
+    <modules>
+        <module name="catalog_products">
+            <label translate="true">Catalog Product</label>
+            <models>
+                <class name="Magento\Catalog\Model\Product" />
+                <class name="Magento\Catalog\Model\Product\Action" />
+                <class name="Magento\Catalog\Model\Product\Attribute\Source\Status" />
+                <class name="Magento\CatalogInventory\Model\StockState" />
+            </models>
+            <events>
+                <event controller_action="catalog_product_save" action_alias="save" />
+                <event controller_action="catalog_product_massDelete" action_alias="massDelete" />
+                <event controller_action="catalog_product_massStatus" action_alias="massStatus" post_dispatch="productUpdate" />
+                <event controller_action="catalog_product_action_attribute_save" action_alias="massEdit" post_dispatch="productUpdate" />
+            </events>
+            <config>
+                <trackfield method="getProductFieldData" />
+                <configpath constant="MODULE_PRODUCT" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="name" />
+            </config>
+        </module>
+        <module name="catalog_categories">
+            <label translate="true">Catalog Categories</label>
+            <models>
+                <class name="Magento\Catalog\Model\Category" />
+            </models>
+            <events>
+                <event controller_action="catalog_category_save" action_alias="save" />
+                <event controller_action="catalog_category_edit" action_alias="edit" />
+                <event controller_action="catalog_category_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getCategoryFieldData" />
+                <configpath constant="MODULE_CATEGORY" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="name" />
+            </config>
+        </module>
+        <module name="customer">
+            <label translate="true">Customer</label>
+            <models>
+                <class name="Magento\Customer\Model\Customer" />
+                <class name="Magento\Newsletter\Model\Subscriber" />
+                <class name="Magento\Customer\Model\Address" />
+            </models>
+            <events>
+                <event controller_action="customer_index_save" action_alias="save" />
+                <event controller_action="customer_index_delete" action_alias="delete" />
+                <event controller_action="customer_index_massDelete" action_alias="massDelete" />
+                <event controller_action="customer_index_massSubscribe" action_alias="massSubscribe" />
+                <event controller_action="customer_index_massUnsubscribe" action_alias="massUnsubscribe" />
+                <event controller_action="customer_index_massAssignGroup" action_alias="massAssignGroup" />
+                <event controller_action="customer_index_inlineEdit" action_alias="massEdit" />
+            </events>
+            <config>
+                <trackfield method="getCustomerFieldData" />
+                <configpath constant="MODULE_CUSTOMER" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="firstname" />
+            </config>
+        </module>
+        <module name="customer_group">
+            <label translate="true">Customer Group</label>
+            <models>
+                <class name="Magento\Customer\Model\Group" />
+            </models>
+            <events>
+                <event controller_action="customer_group_save" action_alias="save" />
+                <event controller_action="customer_group_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getCustomerGroupFieldData" />
+                <configpath constant="MODULE_CUSTOMER" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="customer_group_code" />
+            </config>
+        </module>
+        <module name="catalog_promotion">
+            <label translate="true">Catalog Promotion</label>
+            <models>
+                <class name="Magento\CatalogRule\Model\Rule" />
+            </models>
+            <events>
+                <event controller_action="catalog_rule_promo_catalog_save" action_alias="save" />
+                <event controller_action="catalog_rule_promo_catalog_edit" action_alias="edit" />
+                <event controller_action="catalog_rule_promo_catalog_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getCatalogPromotionFieldData" />
+                <configpath constant="MODULE_PROMOTION" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="name" />
+            </config>
+        </module>
+        <module name="cart_promotion">
+            <label translate="true">Cart Promotion</label>
+            <models>
+                <class name="Magento\SalesRule\Model\Rule" />
+            </models>
+            <events>
+                <event controller_action="sales_rule_promo_quote_save" action_alias="save" />
+                <event controller_action="sales_rule_promo_quote_edit" action_alias="edit" />
+                <event controller_action="sales_rule_promo_quote_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getCartPromotionFieldData" />
+                <configpath constant="MODULE_PROMOTION" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="name" />
+            </config>
+        </module>
+        <module name="email">
+            <label translate="true">Email Newsletter</label>
+            <models>
+                <class name="Magento\Email\Model\Template" />
+                <class name="Magento\Newsletter\Model\Template" />
+            </models>
+            <events>
+                <event controller_action="adminhtml_email_template_save" action_alias="save" />
+                <event controller_action="adminhtml_email_template_edit" action_alias="edit" />
+                <event controller_action="adminhtml_email_template_delete" action_alias="delete" />
+                <event controller_action="newsletter_template_save" action_alias="save" />
+                <event controller_action="newsletter_template_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getEmailFieldData" />
+                <configpath constant="MODULE_EMAIL" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="template_subject" />
+            </config>
+        </module>
+        <module name="cms_pages">
+            <label translate="true">Cms Pages</label>
+            <models>
+                <class name="Magento\Cms\Model\Page" />
+            </models>
+            <events>
+                <event controller_action="cms_page_save" action_alias="save" />
+                <event controller_action="cms_page_edit" action_alias="edit" />
+                <event controller_action="cms_page_delete" action_alias="delete" />
+                <event controller_action="cms_page_massDelete" action_alias="massDelete" />
+                <event controller_action="cms_page_massDisable" action_alias="massDisable" />
+                <event controller_action="cms_page_massEnable" action_alias="massEnable" />
+                <event controller_action="cms_page_inlineEdit" action_alias="massEdit" />
+            </events>
+            <config>
+                <trackfield method="getPageFieldData" />
+                <configpath constant="MODULE_PAGE" />
+                <editurl url="{{module}}/{{controller}}/edit/page_id/{{id}}" />
+                <itemfield field="title" />
+            </config>
+        </module>
+        <module name="cms_blocks">
+            <label translate="true">Cms Blocks</label>
+            <models>
+                <class name="Magento\Cms\Model\Block" />
+            </models>
+            <events>
+                <event controller_action="cms_block_save" action_alias="save" />
+                <event controller_action="cms_block_edit" action_alias="edit" />
+                <event controller_action="cms_block_delete" action_alias="delete" />
+                <event controller_action="cms_block_massDelete" action_alias="massDelete" />
+                <event controller_action="cms_block_inlineEdit" action_alias="massEdit" />
+            </events>
+            <config>
+                <trackfield method="getBlockFieldData" />
+                <configpath constant="MODULE_BLOCK" />
+                <editurl url="{{module}}/{{controller}}/edit/block_id/{{id}}" />
+                <itemfield field="title" />
+            </config>
+        </module>
+        <module name="cms_widget">
+            <label translate="true">Cms Widget</label>
+            <models>
+                <class name="Magento\Widget\Model\Widget\Instance" />
+            </models>
+            <events>
+                <event controller_action="adminhtml_widget_instance_save" action_alias="save" />
+                <event controller_action="adminhtml_widget_instance_edit" action_alias="edit" />
+                <event controller_action="adminhtml_widget_instance_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getWidgetFieldData" />
+                <configpath constant="MODULE_WIDGET" />
+                <editurl url="{{module}}/{{controller}}/edit/instance_id/{{id}}" />
+                <itemfield field="title" />
+            </config>
+        </module>
+        <module name="theme_configuration">
+            <label translate="true">Themes</label>
+            <models>
+                <class name="Magento\Framework\App\Config\Value" />
+            </models>
+            <events>
+                <event controller_action="theme_design_config_save" action_alias="edit" />
+            </events>
+            <config>
+                <trackfield method="getThemeConfigFieldData" />
+                <configpath constant="MODULE_THEME" />
+                <editurl url="theme/design_config/edit/scope/{{id}}" />
+                <itemfield field="config" />
+            </config>
+        </module>
+        <module name="theme_schedule">
+            <label translate="true">Themes Schedule</label>
+            <models>
+                <class name="Magento\Framework\App\DesignInterface" />
+            </models>
+            <events>
+                <event controller_action="adminhtml_system_design_save" action_alias="save" />
+                <event controller_action="adminhtml_system_design_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getThemeScheduleFieldData" />
+                <configpath constant="MODULE_THEME" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="design_change_id" />
+            </config>
+        </module>
+        <module name="system_configuration">
+            <label translate="true">System Configuration</label>
+            <models>
+                <class name="Magento\Framework\App\Config\Value" />
+            </models>
+            <events>
+                <event controller_action="adminhtml_system_config_save" action_alias="save" />
+                <event controller_action="adminhtml_system_currencysymbol_save" action_alias="save" />
+            </events>
+            <config>
+                <trackfield method="getSystemConfigFieldData" />
+                <configpath constant="MODULE_SYSTEM_CONFIG" />
+                <editurl url="admin/system_config/edit/section/{{id}}" />
+                <itemfield field="config" />
+            </config>
+        </module>
+        <module name="product_attributes">
+            <label translate="true">Product Attributes</label>
+            <models>
+                <class name="Magento\Catalog\Model\ResourceModel\Eav\Attribute" />
+            </models>
+            <events>
+                <event controller_action="catalog_product_attribute_save" action_alias="save" />
+                <event controller_action="catalog_product_attribute_edit" action_alias="edit" />
+                <event controller_action="catalog_product_attribute_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getAttributeFieldData" />
+                <configpath constant="MODULE_ATTRIBUTE" />
+                <editurl url="{{module}}/{{controller}}/edit/attribute_id/{{id}}" />
+                <itemfield field="frontend_label" />
+            </config>
+        </module>
+        <module name="product_attributes_set">
+            <label translate="true">Product Attributes Set</label>
+            <models>
+                <class name="Magento\Eav\Model\Entity\Attribute\Set" />
+            </models>
+            <events>
+                <event controller_action="catalog_product_set_save" action_alias="save" />
+                <event controller_action="catalog_product_set_edit" action_alias="edit" />
+                <event controller_action="catalog_product_set_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getAttributeSetFieldData" />
+                <configpath constant="MODULE_ATTRIBUTE" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="attribute_set_name" />
+            </config>
+        </module>
+        <module name="product_review_rating">
+            <label translate="true">Product Review Rating</label>
+            <models>
+                <class name="Magento\Review\Model\Rating" />
+            </models>
+            <events>
+                <event controller_action="review_rating_save" action_alias="save" />
+                <event controller_action="review_rating_edit" action_alias="edit" />
+                <event controller_action="review_rating_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getReviewRatingFieldData" />
+                <configpath constant="MODULE_ATTRIBUTE" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="rating_code" />
+            </config>
+        </module>
+        <module name="product_review">
+            <label translate="true">Product Review</label>
+            <models>
+                <class name="Magento\Review\Model\Review" />
+            </models>
+            <events>
+                <event controller_action="review_product_post" action_alias="save" />
+                <event controller_action="review_product_save" action_alias="edit" />
+                <event controller_action="review_product_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getReviewFieldData" />
+                <configpath constant="MODULE_ATTRIBUTE" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="nickname" />
+            </config>
+        </module>
+        <module name="admin_user">
+            <label translate="true">Admin User</label>
+            <models>
+                <class name="Magento\User\Model\User" />
+            </models>
+            <events>
+                <event controller_action="adminhtml_user_save" action_alias="save" />
+                <event controller_action="adminhtml_user_edit" action_alias="edit" />
+                <event controller_action="adminhtml_user_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getAdminUserFieldData" />
+                <configpath constant="MODULE_ADMIN_USER" />
+                <editurl url="{{module}}/{{controller}}/edit/user_id/{{id}}" />
+                <itemfield field="username" />
+            </config>
+        </module>
+        <module name="admin_user_role">
+            <label translate="true">Admin User Role</label>
+            <models>
+                <class name="Magento\Authorization\Model\Role" />
+            </models>
+            <events>
+                <event controller_action="adminhtml_user_role_saverole" action_alias="save" />
+                <event controller_action="adminhtml_user_role_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getAdminUserRoleFieldData" />
+                <configpath constant="MODULE_ADMIN_USER" />
+                <editurl url="{{module}}/{{controller}}/editrole/rid/{{id}}" />
+                <itemfield field="role_name" />
+            </config>
+        </module>
+        <module name="sales_order">
+            <label translate="true">Sales Order</label>
+            <models>
+                <class name="Magento\Sales\Model\Order" />
+                <class name="Magento\Sales\Model\Order\Invoice" />
+                <class name="Magento\Sales\Model\Order\Status\History" />
+                <class name="Magento\Customer\Model\Customer" />
+                <class name="Magento\Customer\Model\Address" />
+                <class name="Magento\Sales\Model\Order\Invoice\Comment" />
+                <class name="Magento\Sales\Model\Order\Shipment" />
+                <class name="Magento\Sales\Model\Order\Shipment\Comment" />
+                <class name="Magento\Sales\Model\Order\Shipment\Track" />
+                <class name="Magento\Sales\Model\Order\Creditmemo" />
+                <class name="Magento\Sales\Model\Order\Creditmemo\Comment" />
+                <class name="Magento\Sales\Model\Order\Address" />
+            </models>
+            <events>
+                <event controller_action="sales_order_create_save" action_alias="save" />
+                <event controller_action="sales_order_edit_save" action_alias="edit" />
+                <event controller_action="sales_order_addresssave" action_alias="edit" />
+                <event controller_action="sales_order_cancel" action_alias="cancel" />
+                <event controller_action="sales_order_hold" action_alias="hold" />
+                <event controller_action="sales_order_unhold" action_alias="unhold" />
+                <event controller_action="sales_order_create_reorder" action_alias="reorder" />
+                <event controller_action="sales_order_invoice_save" action_alias="save" />
+                <event controller_action="sales_order_creditmemo_save" action_alias="save" />
+                <event controller_action="adminhtml_order_shipment_save" action_alias="save" />
+                <event controller_action="sales_order_massCancel" action_alias="massCancel" />
+                <event controller_action="sales_order_massHold" action_alias="massHold" />
+                <event controller_action="sales_order_massUnhold" action_alias="massUnhold" />
+                <event controller_action="adminhtml_order_shipment_addTrack" action_alias="save" />
+                <event controller_action="sales_order_addComment" action_alias="addComment" />
+                <event controller_action="sales_order_invoice_addComment" action_alias="addComment" />
+                <event controller_action="sales_order_creditmemo_addComment" action_alias="addComment" />
+                <event controller_action="adminhtml_order_shipment_addComment" action_alias="addComment" />
+            </events>
+            <config>
+                <trackfield method="getOrderFieldData" />
+                <configpath constant="MODULE_ORDER" />
+                <editurl url="{{module}}/order/view/order_id/{{id}}" />
+                <itemfield field="increment_id" />
+            </config>
+        </module>
+        <module name="taxes">
+            <label translate="true">Taxes</label>
+            <models>
+                <class name="\Magento\Tax\Model\Calculation\Rule" />
+            </models>
+            <events>
+                <event controller_action="tax_rule_save" action_alias="save"/>
+                <event controller_action="tax_rule_edit" action_alias="edit"/>
+                <event controller_action="tax_rule_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getTaxRuleFieldData" />
+                <configpath constant="MODULE_ORDER" />
+                <editurl url="{{module}}/{{controller}}/edit/rule/{{id}}" />
+                <itemfield field="code" />
+            </config>
+        </module>
+        <module name="tax_rate">
+            <label translate="true">Tax Rate</label>
+            <models>
+                <class name="Magento\Tax\Model\Calculation\Rate" />
+            </models>
+            <events>
+                <event controller_action="tax_rate_save" action_alias="save" />
+                <event controller_action="tax_rate_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getTaxRateFieldData" />
+                <configpath constant="MODULE_ORDER" />
+                <editurl url="{{module}}/{{controller}}/edit/rate/{{id}}" />
+                <itemfield field="code" />
+            </config>
+        </module>
+        <module name="seo_url_rewrites">
+            <label translate="true">SEO URL Rewrites</label>
+            <models>
+                <class name="Magento\UrlRewrite\Model\UrlRewrite" />
+            </models>
+            <events>
+                <event controller_action="adminhtml_url_rewrite_save" action_alias="save" />
+                <event controller_action="adminhtml_url_rewrite_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getUrlRewriteFieldData" />
+                <configpath constant="MODULE_SEO" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="entity_type" />
+            </config>
+        </module>
+        <module name="seo_search_term">
+            <label translate="true">SEO Search Term</label>
+            <models>
+                <class name="Magento\Search\Model\Query" />
+            </models>
+            <events>
+                <event controller_action="search_term_save" action_alias="save" />
+                <event controller_action="search_term_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getSearchTermFieldData" />
+                <configpath constant="MODULE_SEO" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="query_text" />
+            </config>
+        </module>
+        <module name="seo_search_synonyms">
+            <label translate="true">SEO Search Synonyms</label>
+            <models>
+                <class name="Magento\Search\Model\SynonymGroup" />
+            </models>
+            <events>
+                <event controller_action="search_synonyms_save" action_alias="save" />
+                <event controller_action="search_synonyms_delete" action_alias="delete" />
+                <event controller_action="search_synonyms_massDelete" action_alias="massDelete" />
+            </events>
+            <config>
+                <trackfield method="getSearchSynonymsFieldData" />
+                <configpath constant="MODULE_SEO" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="group_id" />
+            </config>
+        </module>
+        <module name="seo_sitemap">
+            <label translate="true">SEO Sitemap</label>
+            <models>
+                <class name="Magento\Sitemap\Model\Sitemap" />
+            </models>
+            <events>
+                <event controller_action="adminhtml_sitemap_save" action_alias="save" />
+                <event controller_action="adminhtml_sitemap_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getSitemapFieldData" />
+                <configpath constant="MODULE_SEO" />
+                <editurl url="{{module}}/{{controller}}/edit/sitemap_id/{{id}}" />
+                <itemfield field="sitemap_filename" />
+            </config>
+        </module>
+        <module name="checkout_agreement">
+            <label translate="true">Terms and Conditions</label>
+            <models>
+                <class name="Magento\CheckoutAgreements\Model\Agreement" />
+            </models>
+            <events>
+                <event controller_action="checkout_agreement_save" action_alias="save" />
+                <event controller_action="checkout_agreement_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getCheckoutAgreementFieldData" />
+                <configpath constant="MODULE_SYSTEM_CONFIG" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="name" />
+            </config>
+        </module>
+        <module name="order_status">
+            <label translate="true">Order Status</label>
+            <models>
+                <class name="Magento\Sales\Model\Order\Status" />
+                <class name="Magento\Sales\Model\ResourceModel\Order\Status" />
+            </models>
+            <events>
+                <event controller_action="sales_order_status_save" action_alias="save" />
+                <event controller_action="sales_order_status_assignPost" action_alias="assign" />
+                <event controller_action="sales_order_status_unassign" action_alias="unassign" />
+            </events>
+            <config>
+                <trackfield method="getOrderStatusFieldData" />
+                <configpath constant="MODULE_SYSTEM_CONFIG" />
+                <editurl url="{{module}}/{{controller}}/edit/status/{{id}}" />
+                <itemfield field="label" />
+            </config>
+        </module>
+        <module name="api_integration">
+            <label translate="true">API Integration</label>
+            <models>
+                <class name="Magento\Integration\Model\Integration" />
+            </models>
+            <events>
+                <event controller_action="adminhtml_integration_save" action_alias="save" />
+                <event controller_action="adminhtml_integration_delete" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getIntegrationFieldData" />
+                <configpath constant="MODULE_SYSTEM_CONFIG" />
+                <editurl url="{{module}}/{{controller}}/edit/id/{{id}}" />
+                <itemfield field="name" />
+            </config>
+        </module>
+    </modules>
+</config>

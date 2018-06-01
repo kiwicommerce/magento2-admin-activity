@@ -1,0 +1,136 @@
+<?php
+/**
+ * KiwiCommerce
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please contact us https://kiwicommerce.co.uk/contacts.
+ *
+ * @category   KiwiCommerce
+ * @package    KiwiCommerce_AdminActivity
+ * @copyright  Copyright (C) 2018 Kiwi Commerce Ltd (https://kiwicommerce.co.uk/)
+ * @license    https://kiwicommerce.co.uk/magento2-extension-license/
+ */
+?>
+<script>
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/modal",
+        'mage/backend/notification',
+        "prototype"
+    ], function(jQuery, modal, notification) {
+
+//<![CDATA[
+        Window.keepMultiModalWindow = true;
+        var adminActivityLogView = {
+            overlayShowEffectOptions : null,
+            overlayHideEffectOptions : null,
+            modal: null,
+            activityId: 0,
+            open : function(editorUrl, elementId, revertable) {
+                if (editorUrl && elementId) {
+                    jQuery.ajax({
+                        url: editorUrl,
+                        data: {
+                            id: elementId
+                        },
+                        showLoader: true,
+                        dataType: 'html',
+                        success: function(data, textStatus, transport) {
+                            this.openDialogWindow(data, elementId, revertable);
+                        }.bind(this)
+                    });
+                }
+            },
+            openDialogWindow : function(data, elementId, revertable) {
+                var self = this;
+                this.activityId = elementId;
+                if (this.modal) {
+                    this.modal.html(jQuery(data).html());
+                } else {
+                    this.modal = jQuery(data).modal({
+                        title: '<?= /* @escapeNotVerified */ __('Activity Log'); ?>',
+                        modalClass: 'magento',
+                        type: 'slide',
+                        firedElementId: elementId,
+                        buttons: [{
+                            text: jQuery.mage.__('Back'),
+                            class: 'action- scalable back',
+                            click: function () {
+                                self.closeDialogWindow(this);
+                            }
+                        },{
+                            text: jQuery.mage.__('Revert'),
+                            class: 'action- scalable action-primary action-revert-activity',
+                            click: function () {
+                                self.revertDialogWindow(this);
+                            }
+                        }],
+                        close: function () {
+                            self.closeDialogWindow(this);
+                        }
+                    });
+                }
+                jQuery(".action-revert-activity").hide();
+                if(revertable == 1) {
+                    jQuery(".action-revert-activity").show();
+                }
+                this.modal.modal('openModal');
+                this.autoResize();
+            },
+            revertDialogWindow : function(dialogWindow) {
+                var self = this;
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '<?= /* @escapeNotVerified */ $block->getRevertUrl(); ?>',
+                    data: {
+                        id: this.activityId,
+                        form_key: '<?= /* @escapeNotVerified */ $block->getFormKey(); ?>'
+                    },
+                    dataType: 'json',
+                    showLoader: true
+                })
+                .success(function (data) {
+                    if (!data.error) {
+                        self.closeDialogWindow(dialogWindow);
+                        window.location.reload();
+                    } else {
+                        self.error(data.message);
+                    }
+                });
+            },
+            closeDialogWindow : function(dialogWindow) {
+
+                jQuery('body').trigger('processStop');
+                dialogWindow.closeModal();
+                Windows.overlayShowEffectOptions = this.overlayShowEffectOptions;
+                Windows.overlayHideEffectOptions = this.overlayHideEffectOptions;
+            },
+            error: function (message) {
+                jQuery('body').notification('clear')
+                    .notification('add', {
+                        error: true,
+                        message: jQuery.mage.__(message),
+                        insertMethod: function (message) {
+                            var $wrapper = jQuery('<div/>').html(message);
+                            jQuery('.page-main-actions').after($wrapper);
+                        }
+                    });
+            },
+            autoResize: function () {
+                jQuery.each(jQuery('textarea.value-container'), function() {
+                    var offset = this.offsetHeight - this.clientHeight;
+                    var resizeTextarea = function(el) {
+                        console.log('You clicked me!!');
+                        jQuery(el).css('height', 'auto').css('height', el.scrollHeight + offset);
+                    };
+                    jQuery(this).unbind().on('click', function() { resizeTextarea(this); }).trigger('click');
+                });
+            }
+        };
+
+        window.adminActivityLogView = adminActivityLogView;
+//]]>
+
+    });
+</script>
