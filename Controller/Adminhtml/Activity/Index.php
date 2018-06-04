@@ -26,7 +26,7 @@ class Index extends Action
     /**
      * @var string
      */
-    const ADMIN_RESOURCE = 'KiwiCommerce_AdminActivity::adminactivity';
+    const ADMIN_RESOURCE = 'KiwiCommerce_AdminActivity::activity';
 
     /**
      * @var PageFactory
@@ -54,7 +54,7 @@ class Index extends Action
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('KiwiCommerce_AdminActivity::adminactivity');
+        $resultPage->setActiveMenu('KiwiCommerce_AdminActivity::activity');
         $resultPage->addBreadcrumb(__('KiwiCommerce'), __('Admin Activity'));
         $resultPage->getConfig()->getTitle()->prepend(__('Admin Activity'));
 
