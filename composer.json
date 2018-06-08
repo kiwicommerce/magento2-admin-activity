@@ -1,23 +1,18 @@
 {
-    "name": "kiwicommerce/magento2-admin-activity",
+    "name": "kiwicommerce/module-admin-activity",
     "description": "Magento 2 - Admin Activity",
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": [
         "OSL-3.0"
     ],
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Kiwi Commerce Ltd",
             "email": "hello@kiwicommerce.co.uk",
             "homepage": "https://kiwicommerce.co.uk/",
             "role": "Leader"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/kiwicommerce/magento2-admin-activity"
         }
     ],
     "autoload": {
