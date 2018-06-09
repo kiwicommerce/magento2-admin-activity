@@ -318,6 +318,26 @@
                 <itemfield field="config" />
             </config>
         </module>
+        <module name="system_store">
+            <label translate="true">Store and Website</label>
+            <models>
+                <class name="Magento\Store\Model\Store" />
+                <class name="Magento\Store\Model\Website" />
+                <class name="Magento\Store\Model\Group" />
+            </models>
+            <events>
+                <event controller_action="adminhtml_system_store_save" action_alias="save" />
+                <event controller_action="adminhtml_system_store_deleteStorePost" action_alias="delete" />
+                <event controller_action="adminhtml_system_store_deleteWebsitePost" action_alias="delete" />
+                <event controller_action="adminhtml_system_store_deleteGroupPost" action_alias="delete" />
+            </events>
+            <config>
+                <trackfield method="getSystemStoreFieldData" />
+                <configpath constant="MODULE_SYSTEM_CONFIG" />
+                <editurl url="admin/system_store/editStore/store_id/{{id}}" />
+                <itemfield field="code" />
+            </config>
+        </module>
         <module name="product_attributes">
             <label translate="true">Product Attributes</label>
             <models>

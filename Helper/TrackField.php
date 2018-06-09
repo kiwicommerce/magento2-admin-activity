@@ -254,6 +254,10 @@ class TrackField extends \Magento\Framework\App\Helper\AbstractHelper
         ];
     }
 
+    /**
+     * Get system config field data
+     * @return array
+     */
     public function getSystemConfigFieldData()
     {
         return [
@@ -463,6 +467,17 @@ class TrackField extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get System store modules fields
+     * @return array
+     */
+    public function getSystemStoreFieldData()
+    {
+        return [
+            'check_if_is_new'
+        ];
+    }
+
+    /**
      * Get integration modules fields
      * @return array
      */
@@ -573,6 +588,7 @@ class TrackField extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $fieldArray = $this->getFields($method);
         $skipFieldArray = $this->getSkipEditFieldData();
+
         if (\KiwiCommerce\AdminActivity\Helper\Data::isWildCardModel($model)) {
             if ($method==self::SYSTEM_METHOD) {
                 return $this->systemConfig->getEditData($model, $fieldArray);

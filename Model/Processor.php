@@ -152,6 +152,11 @@ class Processor
     public $request;
 
     /**
+     * Http request
+     * @var \Magento\Framework\App\Request\Http
+     */
+    public $httpRequest;
+    /**
      * @var Activity\Status
      */
     public $status;
@@ -202,6 +207,7 @@ class Processor
         Helper $helper,
         \Magento\Framework\Message\ManagerInterface $messageManager,
         \Magento\Framework\App\RequestInterface $request,
+        \Magento\Framework\App\Request\Http $httpRequest,
         \KiwiCommerce\AdminActivity\Model\Activity\Status $status,
         \KiwiCommerce\AdminActivity\Model\Handler\PostDispatch $postDispatch
     ) {
@@ -217,6 +223,7 @@ class Processor
         $this->helper = $helper;
         $this->messageManager = $messageManager;
         $this->request = $request;
+        $this->httpRequest = $httpRequest;
         $this->status = $status;
         $this->postDispatch = $postDispatch;
     }
@@ -239,7 +246,6 @@ class Processor
         if (isset($this->eventConfig['post_dispatch'])) {
             $this->_callPostDispatchCallback();
         }
-
         return $this;
     }
 
@@ -436,7 +442,7 @@ class Processor
 
         $activity->setScope($this->getScope());
         $activity->setRemoteIp($this->remoteAddress->getRemoteAddress());
-        $activity->setForwardedIp($this->request->getServer('HTTP_X_FORWARDED_FOR'));
+        $activity->setForwardedIp($this->httpRequest->getServer('HTTP_X_FORWARDED_FOR'));
         $activity->setUserAgent($this->handler->header->getHttpUserAgent());
         $activity->setModule($this->helper->getActivityModuleName($this->eventConfig['module']));
         $activity->setActionType($this->eventConfig['action']);

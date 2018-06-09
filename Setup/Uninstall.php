@@ -50,10 +50,10 @@ class Uninstall implements UninstallInterface
         $setup->startSetup();
         $connection = $setup->getConnection();
 
-        $connection->dropTable($connection->getTableName('kiwicommerce_activity'));
         $connection->dropTable($connection->getTableName('kiwicommerce_activity_log'));
         $connection->dropTable($connection->getTableName('kiwicommerce_activity_detail'));
         $connection->dropTable($connection->getTableName('kiwicommerce_login_activity'));
+        $connection->dropTable($connection->getTableName('kiwicommerce_activity'));
         $setup->endSetup();
 
         $scope = $this->scope;
