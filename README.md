@@ -1,4 +1,4 @@
-## Magento 2 - Admin Activity by Kiwi Commerce
+## Magento 2 - Admin Activity by KiwiCommerce
 
 ### Overview
 - Easily track every admin activity like add, edit, delete, print, view, mass update etc.
@@ -9,16 +9,16 @@
 
 ### **Installation**
  
- 1. Install using Composer
+ 1. Composer Installation
       - Navigate to your Magento root folder<br />
             `cd path_to_the_magento_root_directory`<br />
       - Then run the following command<br />
           `composer require kiwicommerce/module-admin-activity`<br/>
       - Make sure that composer finished the installation without errors.
 
- 2. Install manually
+ 2. Command Line Installation
       - Backup your web directory and database.
-      - Download Admin Activity Log installation package from <a href="https://github.com/kiwicommerce/magento2-admin-activity/releases/download/v1.0.2/kiwicommerce-admin-activity-v102.zip">here</a>.
+      - Download Admin Activity Log installation package from <a href="https://github.com/kiwicommerce/magento2-admin-activity/releases/download/v1.0.3/kiwicommerce-admin-activity-v103.zip">here</a>.
       - Upload contents of the Admin Activity Log installation package to your Magento root directory.
       - Navigate to your Magento root folder<br />
           `cd path_to_the_magento_root_directory`<br />
@@ -32,7 +32,7 @@
           `php bin/magento setup:static-content:deploy`<br />
           `php bin/magento cache:flush`
 
-Find More details on <a href="https://kiwicommerce.co.uk/extensions/magento2-admin-activity/" target="_blank">Kiwi Commerce</a>
+Find More details on <a href="https://kiwicommerce.co.uk/extensions/magento2-admin-activity/" target="_blank">KiwiCommerce</a>
 
 ## Where will it appear in the Admin Panel
 
@@ -77,4 +77,5 @@ We love answering questions or doubts simply ask us in issue section. We're look
  
   - Follow us <a href="https://twitter.com/KiwiCommerce">@KiwiCommerce</a>
   - <a href="mailto:support@kiwicommerce.co.uk">Email Us</a>
-  - Have a look at our <a href="https://kiwicommerce.co.uk/docs/">documentation</a> 
+  - Have a look at our <a href="https://kiwicommerce.co.uk/docs/admin-activity/">documentation</a> 
+
