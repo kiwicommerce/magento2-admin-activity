@@ -58,8 +58,8 @@ class ItemColumn extends Column
     /**
      * ItemColumn constructor.
      * @param \Magento\Framework\View\Element\UiComponent\ContextInterface $context
+     * @param \Magento\Framework\View\Element\Context $contexts
      * @param \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory
-     * @param \Magento\Framework\Escaper $escaper
      * @param \Magento\Backend\Model\UrlInterface $backendUrl
      * @param array $components
      * @param array $data
@@ -68,12 +68,11 @@ class ItemColumn extends Column
         \Magento\Framework\View\Element\UiComponent\ContextInterface $context,
         \Magento\Framework\View\Element\Context $contexts,
         \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory,
-        \Magento\Framework\Escaper $escaper,
         \Magento\Backend\Model\UrlInterface $backendUrl,
         array $components,
         array $data
     ) {
-        $this->escaper = $escaper;
+        $this->escaper = $contexts->getEscaper();
         $this->backendUrl = $backendUrl;
         $this->filterManager = $contexts->getFilterManager();
         parent::__construct($context, $uiComponentFactory, $components, $data);
