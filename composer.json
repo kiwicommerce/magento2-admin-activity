@@ -2,7 +2,7 @@
     "name": "kiwicommerce/module-admin-activity",
     "description": "Magento 2 - Admin Activity",
     "type": "magento2-module",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "license": [
         "OSL-3.0"
     ],
