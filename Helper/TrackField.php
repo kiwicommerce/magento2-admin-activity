@@ -658,7 +658,7 @@ class TrackField extends \Magento\Framework\App\Helper\AbstractHelper
         if ($method == self::PRODUCT_METHOD) {
             $newQty = $model->getData('stock_data');
             $oldQty = $model->getOrigData('quantity_and_stock_status');
-            if ($newQty['qty'] != $oldQty['qty']) {
+            if (isset($newQty['qty']) && isset($oldQty['qty']) && $newQty['qty'] != $oldQty['qty']) {
                 $logData['qty'] = [
                     'old_value' => $oldQty['qty'],
                     'new_value' => $newQty['qty']
