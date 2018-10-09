@@ -5,20 +5,20 @@
 - Track fields that have been changed from the backend.
 - Allow administrator to revert the modification.
 
-## Installation
- 1. Composer Installation
+## **Installation**
+1. Composer Installation
       - Navigate to your Magento root folder<br />
             `cd path_to_the_magento_root_directory`
       - Then run the following command<br />
           `composer require kiwicommerce/module-admin-activity`
       - Make sure that composer finished the installation without errors.
 
- 2. Command Line Installation
+2. Command Line Installation
       - Backup your web directory and database.
-      - Download Admin Activity Log installation package from [here](https://github.com/kiwicommerce/magento2-admin-activity/releases/download/v1.0.4/kiwicommerce-admin-activity-v104.zip)
+      - Download the latest Cron Scheduler installation package kiwicommerce-admin-activity-vvvv.zip [here](https://github.com/kiwicommerce/magento2-admin-activity/releases)
       - Navigate to your Magento root folder<br />
           `cd path_to_the_magento_root_directory`<br />
-      - Upload contents of the Admin Activity Log installation package to your Magento root directory.
+      - Upload contents of the Admin Activity Log installation package to your Magento root directory
       - Then run the following command<br />
           `php bin/magento module:enable KiwiCommerce_AdminActivity`<br />
    
@@ -70,6 +70,7 @@ Feel free to get in touch with us at https://kiwicommerce.co.uk/get-in-touch/
 * [Magento 2 Login As Customer](https://kiwicommerce.co.uk/extensions/magento2-login-as-customer/)
 * [Magento 2 Inventory Log](https://kiwicommerce.co.uk/extensions/magento2-inventory-log/)
 * [Magento 2 Enhanced SMTP](https://kiwicommerce.co.uk/extensions/magento2-enhanced-smtp/)
+* [Magento 2 Customer Password](https://github.com/kiwicommerce/magento2-customer-password/)
 
 ## Contribution
 Well unfortunately there is no formal way to contribute, we would encourage you to feel free and contribute by:
