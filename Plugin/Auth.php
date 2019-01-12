@@ -61,11 +61,11 @@ class Auth
     public function aroundLogout(\Magento\Backend\Model\Auth $auth, callable $proceed)
     {
         $this->benchmark->start(__METHOD__);
-        $result = $proceed();
         if ($this->helper->isLoginEnable()) {
             $user = $auth->getAuthStorage()->getUser();
             $this->loginRepository->setUser($user)->addLogoutLog();
         }
+        $result = $proceed();
         $this->benchmark->end(__METHOD__);
         return $result;
     }
