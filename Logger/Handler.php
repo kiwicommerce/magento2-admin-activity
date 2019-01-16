@@ -13,8 +13,6 @@
  */
 namespace KiwiCommerce\AdminActivity\Logger;
 
-use Monolog\Logger;
-
 /**
  * Class Handler
  * @package KiwiCommerce\AdminActivity\Logger
@@ -25,7 +23,7 @@ class Handler extends \Magento\Framework\Logger\Handler\Base
      * Logging level
      * @var int
      */
-    public $loggerType = Logger::INFO;
+    public $loggerType = \KiwiCommerce\AdminActivity\Logger\Logger::INFO;
 
     /**
      * File name
