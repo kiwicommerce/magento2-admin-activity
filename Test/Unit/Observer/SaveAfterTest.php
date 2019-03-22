@@ -106,7 +106,7 @@ class SaveAfterTest extends \PHPUnit\Framework\TestCase
             ->with($this->objectMock)
             ->willReturnSelf();
 
-        $this->assertNull($this->saveAfter->execute($this->observerMock));
+        $this->assertTrue($this->saveAfter->execute($this->observerMock));
     }
 
     /**
@@ -154,6 +154,6 @@ class SaveAfterTest extends \PHPUnit\Framework\TestCase
             ->with($this->objectMock)
             ->willReturnSelf();
 
-        $this->assertNull($this->saveAfter->execute($this->observerMock));
+        $this->assertTrue($this->saveAfter->execute($this->observerMock));
     }
 }
