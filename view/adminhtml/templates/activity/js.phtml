@@ -91,14 +91,14 @@
                     dataType: 'json',
                     showLoader: true
                 })
-                    .success(function (data) {
-                        if (!data.error) {
-                            self.closeDialogWindow(dialogWindow);
-                            window.location.reload();
-                        } else {
-                            self.error(data.message);
-                        }
-                    });
+                .success(function (data) {
+                    if (!data.error) {
+                        self.closeDialogWindow(dialogWindow);
+                        window.location.reload();
+                    } else {
+                        self.error(data.message);
+                    }
+                });
             },
             closeDialogWindow : function(dialogWindow) {
 
