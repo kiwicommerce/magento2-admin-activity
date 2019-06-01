@@ -78,17 +78,18 @@ $adminDetails = $block->getAdminDetails();
                                     } ?>
                                 </span>
                             </td>
-                            <td>
-                                <span class="value-container <?php switch ($compareResult) {
-                                    case 0:
-                                        echo 'modified';
-                                        break;
-                                    case 1:
-                                        echo 'created';
-                                        break;
-                                    case 2:
-                                        echo 'deleted';
-                                } ?>"
+                            <td class="
+                            <?php switch ($compareResult) {
+                                case 0:
+                                    echo 'modified';
+                                    break;
+                                case 1:
+                                    echo 'created';
+                                    break;
+                                case 2:
+                                    echo 'deleted';
+                            } ?>">
+                                <span class="value-container"
                                       id="value-container-new"
                                       readonly><?php if (!$block->activityRepository->isFieldProtected($item['field_name'])) {
                                         echo $block->escapeHtml($item['new_value']);
