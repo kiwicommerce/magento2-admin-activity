@@ -22,3 +22,18 @@ textarea.value-container {
     display:block;
     overflow:hidden;
 }
+
+span.value-container.created {
+    background-color: green;
+    color: black;
+}
+
+span.value-container.deleted {
+    background-color: red;
+    color: black;
+}
+
+span.value-container.modified {
+    background-color: yellow;
+    color: black;
+}
