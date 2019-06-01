@@ -13,8 +13,12 @@
  */
 namespace KiwiCommerce\AdminActivity\Helper;
 
+use Magento\Catalog\Model\Category;
+use Magento\Catalog\Model\ResourceModel\CategoryFactory;
+
 /**
  * Class Data
+ *
  * @package KiwiCommerce\AdminActivity\Helper
  */
 class TrackField extends \Magento\Framework\App\Helper\AbstractHelper
@@ -45,19 +49,28 @@ class TrackField extends \Magento\Framework\App\Helper\AbstractHelper
     public $themeConfig;
 
     /**
+     * @var CategoryFactory
+     */
+    private $categoryFactory;
+
+    /**
      * TrackField constructor.
-     * @param \Magento\Framework\App\Helper\Context $context
+     *
+     * @param \Magento\Framework\App\Helper\Context                   $context
      * @param \KiwiCommerce\AdminActivity\Model\Activity\SystemConfig $systemConfig
-     * @param \KiwiCommerce\AdminActivity\Model\Activity\ThemeConfig $themeConfig
+     * @param \KiwiCommerce\AdminActivity\Model\Activity\ThemeConfig  $themeConfig
+     * @param CategoryFactory    $categoryFactory
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \KiwiCommerce\AdminActivity\Model\Activity\SystemConfig $systemConfig,
-        \KiwiCommerce\AdminActivity\Model\Activity\ThemeConfig $themeConfig
+        \KiwiCommerce\AdminActivity\Model\Activity\ThemeConfig $themeConfig,
+        CategoryFactory $categoryFactory
     ) {
         parent::__construct($context);
         $this->systemConfig = $systemConfig;
         $this->themeConfig = $themeConfig;
+        $this->categoryFactory = $categoryFactory;
     }
 
     /**
@@ -602,17 +615,48 @@ class TrackField extends \Magento\Framework\App\Helper\AbstractHelper
             $logData = $this->getWildCardData($model, $method);
             $skipFieldArray = array_merge($skipFieldArray, $fieldArray);
             foreach ($model->getData() as $key => $value) {
-                if ($this->validateValue($model, $key, $value, $skipFieldArray)) {
-                    continue;
-                }
-                $newData = !empty($value) ? $value : '';
-                $oldData = !empty($model->getOrigData($key)) ? $model->getOrigData($key) : '';
-                if (!empty($newData) || !empty($oldData)) {
-                    if ($newData != $oldData) {
+                if ($key === 'category_ids') {
+                    $origCategoryIds = [];
+                    foreach ($model->getOrigData($key) as $origCategoryId) {
+                        /** @var Category $category */
+                        $category = $this->categoryFactory->create()->load($origCategoryId);
+                        $origCategoryIds[$origCategoryId] = $category->getName();
+                    }
+                    $newCategoryIds = [];
+                    foreach ($value as $newCategoryId) {
+                        if (isset($origCategoryIds[$newCategoryId])) {
+                            $newCategoryIds[$newCategoryId] = $origCategoryIds[$newCategoryId];
+                        } else {
+                            /** @var Category $category */
+                            $category = $this->categoryFactory->create()->load($newCategoryId);
+                            $newCategoryIds[$newCategoryId] = $category->getName();
+                        }
+                    }
+                    if (array_count_values($newCategoryIds) > array_count_values($origCategoryIds)) {
+                        $result = array_diff($newCategoryIds, $origCategoryIds);
+                    } else {
+                        $result = array_diff($origCategoryIds, $newCategoryIds);
+                    }
+
+                    if (!empty($result)) {
                         $logData[$key] = [
-                            'old_value' => $oldData,
-                            'new_value' => $newData
+                            'old_value' => implode(', ', $origCategoryIds),
+                            'new_value' => implode(', ', $newCategoryIds)
                         ];
+                    }
+                } else {
+                    if ($this->validateValue($model, $key, $value, $skipFieldArray)) {
+                        continue;
+                    }
+                    $newData = !empty($value) ? $value : '';
+                    $oldData = !empty($model->getOrigData($key)) ? $model->getOrigData($key) : '';
+                    if (!empty($newData) || !empty($oldData)) {
+                        if ($newData !== $oldData) {
+                            $logData[$key] = [
+                                'old_value' => $oldData,
+                                'new_value' => $newData
+                            ];
+                        }
                     }
                 }
             }
