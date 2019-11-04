@@ -16,7 +16,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <tab id="kiwicommerce" translate="label" sortOrder="9999">
-            <label><![CDATA[<span class="kiwiCommerce-logo">KiwiCommerce Extensions</span>]]></label>
+            <label><![CDATA[KiwiCommerce Extensions]]></label>
         </tab>
         <section id="admin_activity" translate="label" sortOrder="130" showInDefault="1" showInWebsite="0" showInStore="0">
             <class>separator-top</class>
