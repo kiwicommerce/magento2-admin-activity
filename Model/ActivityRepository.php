@@ -133,7 +133,7 @@ class ActivityRepository implements \KiwiCommerce\AdminActivity\Api\ActivityRepo
     {
         $collection = $this->collectionFactory->create()
             ->addFieldToSelect('entity_id')
-            ->addFieldToFilter('created_at', ["lteq" => date('Y-m-d H:i:s', $endDate)]);
+            ->addFieldToFilter('created_at', ["lteq" => $endDate]);
         return $collection;
     }
 
