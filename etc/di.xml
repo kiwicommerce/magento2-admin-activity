@@ -49,6 +49,9 @@
             <argument name="converter" xsi:type="object">KiwiCommerce\AdminActivity\Model\Config\Converter</argument>
             <argument name="schemaLocator" xsi:type="object">KiwiCommerce\AdminActivity\Model\Config\SchemaLocator</argument>
             <argument name="fileName" xsi:type="string">adminactivity.xml</argument>
+            <argument name="idAttributes" xsi:type="array">
+                <item name="/config/modules/module" xsi:type="string">name</item>
+            </argument>
         </arguments>
     </virtualType>
 
