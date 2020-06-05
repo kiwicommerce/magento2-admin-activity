@@ -77,11 +77,16 @@ class SystemConfig implements \KiwiCommerce\AdminActivity\Api\Activity\ModelInte
     public function getOldData($model)
     {
         $path = $this->getPath($model);
-        $systemData = $this->valueFactory->create()->getCollection()
-                            ->addFieldToFilter('path', ['like'=> $path.'/%']);
+        $systemData = $this->valueFactory->create()->getCollection()->addFieldToFilter('path', ['like'=> $path.'/%']);
         $data = [];
         foreach ($systemData->getData() as $config) {
-            list($path, $group, $field) = explode('/', $config['path']);
+            $splittedPath = explode('/', $config['path']);
+            if (count($splittedPath) === 2) {
+                [$group, $field] = explode('/', $config['path']);
+            } else {
+                [$path, $group, $field] = explode('/', $config['path']);
+            }
+
             $data[$group]['fields'][$field]['value'] = $config['value'];
         }
 
