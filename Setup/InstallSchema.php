@@ -155,7 +155,7 @@ class InstallSchema implements InstallSchemaInterface
             'activity_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             10,
-            ['nullable' => true, 'unsigned' => true, 'nullable' => false],
+            ['nullable' => true, 'unsigned' => true],
             'Entity id of kiwicommerce_activity table'
         )->addColumn(
             'field_name',
