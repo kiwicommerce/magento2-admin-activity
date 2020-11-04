@@ -1,3 +1,5 @@
+# We're not maintaining this extension, if you need any support please contact us at hello@kiwicommerce.co.uk
+
 # Magento 2 - Admin Activity by [KiwiCommerce](https://kiwicommerce.co.uk/)
 - Easily track every admin activity like add, edit, delete, print, view, mass update etc.
 - Failed attempts of admin login are recorded as well. You get access to the user’s login information and IP address.
