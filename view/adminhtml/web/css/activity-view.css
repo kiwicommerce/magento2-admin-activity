@@ -19,6 +19,18 @@ textarea.value-container {
     box-shadow: none;
     height: auto;
     outline: none;
-    display:block;
-    overflow:hidden;
+    display: block;
+    overflow: hidden;
+}
+
+#log-listing-table tbody tr td.created {
+    background-color: green;
+}
+
+#log-listing-table tbody tr td.deleted {
+    background-color: red;
+}
+
+#log-listing-table tbody tr td.modified {
+    background-color: yellow;
 }

@@ -11,6 +11,7 @@
  * @copyright  Copyright (C) 2018 Kiwi Commerce Ltd (https://kiwicommerce.co.uk/)
  * @license    https://kiwicommerce.co.uk/magento2-extension-license/
  */
+
 namespace KiwiCommerce\AdminActivity\Block\Adminhtml;
 
 use Magento\Backend\Block\Template;
@@ -87,5 +88,26 @@ class ActivityLogListing extends Template
         $logData['browser'] = $browser;
         $logData['date'] = $activity->getUpdatedAt();
         return $logData;
+    }
+
+    /**
+     * @param $newValue
+     * @param $oldValue
+     * @return int
+     *
+     * Legend of return values:
+     * 0: Old value was modified
+     * 1: Value was created
+     * 2: Value was deleted
+     */
+    public function compareValues($newValue, $oldValue)
+    {
+        if ($oldValue === '' && $newValue !== null) {
+            return 1;
+        } else if ($oldValue !== null && $newValue === '') {
+            return 2;
+        } else {
+            return 0;
+        }
     }
 }

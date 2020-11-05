@@ -75,6 +75,7 @@
                 if(revertable == 1) {
                     jQuery(".action-revert-activity").show();
                 }
+
                 this.modal.modal('openModal');
                 this.autoResize();
             },
@@ -118,13 +119,12 @@
                     });
             },
             autoResize: function () {
-                jQuery.each(jQuery('textarea.value-container'), function() {
+                jQuery.each(jQuery('span.value-container'), function() {
                     var offset = this.offsetHeight - this.clientHeight;
-                    var resizeTextarea = function(el) {
-                        console.log('You clicked me!!');
+                    var resizeSpan = function(el) {
                         jQuery(el).css('height', 'auto').css('height', el.scrollHeight + offset);
                     };
-                    jQuery(this).unbind().on('click', function() { resizeTextarea(this); }).trigger('click');
+                    jQuery(this).unbind().on('click', function() { resizeSpan(this); }).trigger('click');
                 });
             }
         };
