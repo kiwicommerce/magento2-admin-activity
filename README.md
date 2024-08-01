@@ -73,10 +73,10 @@ Feel free to get in touch with us at https://kiwicommerce.co.uk/get-in-touch/
 * [Magento 2 Enhanced SMTP](https://kiwicommerce.co.uk/extensions/magento2-enhanced-smtp/)
 * [Magento 2 Customer Password](https://github.com/kiwicommerce/magento2-customer-password/)
 
-## Contribution
+
 ### Compatibility
   -Magento 2.4.6
-  
+
   -Magento 2.4.7
 
 ## Contribution
