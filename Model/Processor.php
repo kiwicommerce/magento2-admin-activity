@@ -444,10 +444,8 @@ class Processor
         $activity->setRemoteIp($this->remoteAddress->getRemoteAddress());
         $activity->setForwardedIp($this->httpRequest->getServer('HTTP_X_FORWARDED_FOR'));
         $activity->setUserAgent($this->handler->header->getHttpUserAgent());
-        if($this->eventConfig != null) {
-            $activity->setModule($this->helper->getActivityModuleName($this->eventConfig['module']));
-            $activity->setActionType($this->eventConfig['action']);
-        }
+        $activity->setModule($this->helper->getActivityModuleName($this->eventConfig['module'] ?? null));
+        $activity->setActionType($this->eventConfig['action'] ?? null);
         $activity->setFullaction($this->escapeString($this->lastAction, '/'));
         $activity->setStoreId(0);
 
