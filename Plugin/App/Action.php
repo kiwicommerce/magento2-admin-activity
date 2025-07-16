@@ -44,10 +44,10 @@ class Action
 
     /**
      * Get before dispatch data
-     * @param \Magento\Framework\Interception\InterceptorInterface $controller
+     * @param \Magento\Framework\App\ActionInterface $controller
      * @return void
      */
-    public function beforeDispatch(\Magento\Framework\Interception\InterceptorInterface $controller)
+    public function beforeDispatch(\Magento\Framework\App\ActionInterface $controller)
     {
         $this->benchmark->start(__METHOD__);
         $actionName = $controller->getRequest()->getActionName();
